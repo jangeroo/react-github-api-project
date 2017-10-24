@@ -85,10 +85,10 @@ In `index.js`, you currently have your user route setup like this:
 <Route path="user/:username" render={renderUser} />
 ```
 
-We need to add the followers route to the User component. Add this line in the appropriate position in User.jsx
+We need to add the followers route to the User component. Add the following line to the appropriate position in User.jsx. You will need to modify the path property.
 
 ```javascript
-<Route path="followers" component={Followers} />
+<Route path={'/user/decodejacques/followers'} component={Followers} /> 
 ```
 
 For this to do anything, we first have to implement the `Followers` component.
