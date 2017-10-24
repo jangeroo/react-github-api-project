@@ -125,8 +125,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .user-link {
-    /* display: flex;
-    align-content: center; */
+    display: flex;
+    align-content: center;
     text-decoration: none;
 }
 
