@@ -116,3 +116,28 @@ h1,h2,h3,h4,h5,h6 {
     margin: 0;
     white-space: nowrap;
 }
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-around;
+}
+
+.user-link {
+    /* display: flex;
+    align-content: center; */
+    text-decoration: none;
+}
+
+.user-link__title {
+    font-size: 15px;
+}
+
+.user-link__avatar {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 1em;
+    float: left;
+}

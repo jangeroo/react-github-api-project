@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+
+import Followers from './Followers.jsx'
 
 class User extends React.Component {
     constructor() {
@@ -20,6 +22,19 @@ class User extends React.Component {
     When `render` gets called again, `this.state.user` exists and we get the user info display instead of "LOADING..."
     */
     componentDidMount() {
+        this.fetchUser()
+    }
+    
+    componentDidUpdate(prevProps) {
+        if (this.props.username === prevProps.username) {
+            console.log('same user')
+        } else {
+            console.log('user changed. fetching new user data')
+            this.fetchUser()
+        }
+    }
+
+    fetchUser() {
         fetch(`https://api.github.com/users/${this.props.username}`)
         .then(response => response.json())
         .then(
@@ -89,6 +104,7 @@ class User extends React.Component {
                         {stats.map(this.renderStat)}
                     </ul>
                 </div>
+                <Route path={`/user/${this.props.username}/followers`} render={() => (<Followers username={this.props.username} />)} />
             </div>
         );
     }

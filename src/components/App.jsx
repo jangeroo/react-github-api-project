@@ -8,7 +8,7 @@ This function is used to render the user route. Unfortunately, it always
 renders the same user. You need to fix this.
 */
 const renderUser = (info) => {
-    return (<User username="decodejacques" />)
+    return (<User username={info.match.params.username} />)
 }
 
 class App extends React.Component {
