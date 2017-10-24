@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 
 import Followers from './Followers.jsx'
+import Following from './Following.jsx'
 
 class User extends React.Component {
     constructor() {
@@ -105,6 +106,7 @@ class User extends React.Component {
                     </ul>
                 </div>
                 <Route path={`/user/${this.props.username}/followers`} render={() => (<Followers username={this.props.username} />)} />
+                <Route path={`/user/${this.props.username}/following`} render={() => (<Following username={this.props.username} />)} />
             </div>
         );
     }
