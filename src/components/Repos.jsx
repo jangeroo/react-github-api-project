@@ -21,11 +21,6 @@ class Repos extends Component {
         });
     }
     
-    componentDidUpdate() {
-        console.log(this.state.repos[0])
-        // this.state.followers.forEach(user => console.log(user))
-    }
-
     renderRepo = repo => {
         return (<GithubRepo repo={repo} key={repo.id}/>)
     }

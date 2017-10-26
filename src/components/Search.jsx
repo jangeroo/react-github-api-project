@@ -20,7 +20,6 @@ class Search extends React.Component {
 
 
     handleInputChange = e => {
-        // This needs to be filled in
         // console.log('handling input... it\'s now', e.target.value)
         this.setState({user: e.target.value})
     }

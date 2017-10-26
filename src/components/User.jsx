@@ -17,10 +17,8 @@ class User extends React.Component {
     }
     
     componentDidUpdate(prevProps) {
-        if (this.props.username === prevProps.username) {
-            console.log('same user')
-        } else {
-            console.log('user changed. fetching new user data')
+        // Only fetch new data if the user has changed
+        if (!(this.props.username === prevProps.username)) {
             this.fetchUser()
         }
     }
@@ -31,8 +29,6 @@ class User extends React.Component {
         .then(response => response.json())
         .then(
             user => {
-                // How can we use `this` inside a callback without binding it??
-                // Make sure you understand this fundamental difference with arrow functions!!!
                 this.setState({
                     user: user
                 });
@@ -40,9 +36,6 @@ class User extends React.Component {
         );
     }
 
-    /*
-    This method is used as a mapping function. Eventually this could be factored out to its own component.
-    */
     renderStat(stat) {
         return (
             <li key={stat.name} className="user-info__stat">

@@ -21,14 +21,7 @@ class Followers extends Component {
         });
     }
     
-    componentDidUpdate() {
-        console.log(this.state.followers)
-        // this.state.followers.forEach(user => console.log(user))
-    }
-
     renderFollower = follower => {
-        // return (<div>follower</div>)
-        // console.log('rendering follower:', follower)
         return (<GithubUser user={follower} key={follower.login}/>)
     }
 
