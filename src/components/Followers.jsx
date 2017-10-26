@@ -32,7 +32,7 @@ class Followers extends Component {
         });
     }
     
-    renderFollower = follower => {
+    renderFollowee = follower => {
         return (<GithubUser user={follower} key={follower.id}/>)
     }
 
@@ -46,7 +46,7 @@ class Followers extends Component {
                     elementHeight={35}
                     infiniteLoadBeginEdgeOffset={100}
                 >
-                    {this.state.followers.map(follower => this.renderFollower(follower))}
+                    {this.state.followers.map(follower => this.renderFollowee(follower))}
                 </Infinite>
             </div>
         );
