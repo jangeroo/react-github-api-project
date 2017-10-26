@@ -20,9 +20,11 @@ class Followers extends Component {
 
     fetchData = () => {
         var path = `/users/${this.props.username}/followers`
-        fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}`)
+        var params = `page=${this.state.page}&per_page=25`
+        fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}&${params}`)
         .then(response => response.json())
         .then(followers => {
+            console.log(`page ${this.state.page} of followers:`, followers)
             this.setState({
                 followers: followers
             });
