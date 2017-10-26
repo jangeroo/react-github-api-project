@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types'
+import Infinite from 'react-infinite'
 
 import { GITHUB_URL, GITHUB_TOKEN } from '../global_contants.js'
 import GithubUser from './GithubUser.jsx'
@@ -14,12 +15,7 @@ class Followers extends Component {
         };
     }
 
-    componentDidMount() {
-        this.fetchData()
-    }
-
     fetchData = () => {
-        // console.log('starting state:', this.state)
         this.setState({loading: true})
 
         var path = `/users/${this.props.username}/followers`
@@ -28,7 +24,6 @@ class Followers extends Component {
         .then(response => response.json())
         .then(followers => {
             // console.log(`page ${this.state.page} of followers:`, followers)
-            // console.log('post-successful-fetch state:', this.state)
             this.setState(st => ({
                 followers: st.followers.concat(followers),
                 page: st.page + 1,
@@ -36,26 +31,23 @@ class Followers extends Component {
             }));
         });
     }
-
-    // componentDidUpdate() {
-    //     console.log('final state:', this.state)
-    // }
     
     renderFollower = follower => {
-        return (<GithubUser user={follower} key={follower.login}/>)
+        return (<GithubUser user={follower} key={follower.id}/>)
     }
 
     render() {
-        if (!this.state.followers) return (
-            <div>Loading...</div>
-        )
-
         return (
             <div className="followers-page">
                 <h3>Followers of {this.props.username.toUpperCase()}</h3>
-                <ul className="user-list">
+                <Infinite isInfiniteLoading={this.state.loading}
+                    onInfiniteLoad={this.fetchData}
+                    useWindowAsScrollContainer
+                    elementHeight={35}
+                    infiniteLoadBeginEdgeOffset={100}
+                >
                     {this.state.followers.map(follower => this.renderFollower(follower))}
-                </ul>
+                </Infinite>
             </div>
         );
     }
