@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
 
+import { GITHUB_URL, GITHUB_TOKEN } from '../global_contants.js'
 import Repos from './Repos.jsx'
 import Followers from './Followers.jsx'
 import Following from './Following.jsx'
@@ -11,18 +12,6 @@ class User extends React.Component {
         this.state = {};
     }
 
-    /*
-    This method will be called by React after the first render. It's a perfect place to load
-    data with AJAX. This User component gets mounted in the DOM as soon as the URL is /user/:username
-
-    When that happens, react-router will pass a `params` prop containing every parameter in the URL, just like
-    when we get URL parameters in Express with req.params. Here, it's this.props.params. Since we called our route
-    parameter `username`, it's available under this.props.params.username
-
-    We're using it to make an API call to GitHub to fetch the user data for the username in the URL. Once we receive
-    the data -- in the callback -- we call `setState` to put the user data in our state. This will trigger a re-render.
-    When `render` gets called again, `this.state.user` exists and we get the user info display instead of "LOADING..."
-    */
     componentDidMount() {
         this.fetchUser()
     }
@@ -37,7 +26,8 @@ class User extends React.Component {
     }
 
     fetchUser() {
-        fetch(`https://api.github.com/users/${this.props.username}`)
+        var path = `/users/${this.props.username}`
+        fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}`)
         .then(response => response.json())
         .then(
             user => {

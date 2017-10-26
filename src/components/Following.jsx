@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types'
 
+import { GITHUB_URL, GITHUB_TOKEN } from '../global_contants.js'
 import GithubUser from './GithubUser.jsx'
 
 class Following extends Component {
@@ -10,7 +11,8 @@ class Following extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://api.github.com/users/${this.props.username}/following`)
+        var path = `/users/${this.props.username}/following`
+        fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}`)
         .then(response => response.json())
         .then(followees => {
             this.setState({

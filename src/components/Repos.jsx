@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types'
 
+import { GITHUB_URL, GITHUB_TOKEN } from '../global_contants.js'
 import GithubRepo from './GithubRepo.jsx'
 
 class Repos extends Component {
@@ -10,7 +11,8 @@ class Repos extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://api.github.com/users/${this.props.username}/repos`)
+        var path = `/users/${this.props.username}/repos`
+        fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}`)
         .then(response => response.json())
         .then(repos => {
             this.setState({
