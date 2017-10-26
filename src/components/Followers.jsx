@@ -19,17 +19,27 @@ class Followers extends Component {
     }
 
     fetchData = () => {
+        // console.log('starting state:', this.state)
+        this.setState({loading: true})
+
         var path = `/users/${this.props.username}/followers`
         var params = `page=${this.state.page}&per_page=25`
         fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}&${params}`)
         .then(response => response.json())
         .then(followers => {
-            console.log(`page ${this.state.page} of followers:`, followers)
-            this.setState({
-                followers: followers
-            });
+            // console.log(`page ${this.state.page} of followers:`, followers)
+            // console.log('post-successful-fetch state:', this.state)
+            this.setState(st => ({
+                followers: st.followers.concat(followers),
+                page: st.page + 1,
+                loading: false,
+            }));
         });
     }
+
+    // componentDidUpdate() {
+    //     console.log('final state:', this.state)
+    // }
     
     renderFollower = follower => {
         return (<GithubUser user={follower} key={follower.login}/>)
