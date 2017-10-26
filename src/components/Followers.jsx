@@ -7,10 +7,18 @@ import GithubUser from './GithubUser.jsx'
 class Followers extends Component {
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            page: 1,
+            loading: false,
+            followers: [],
+        };
     }
 
     componentDidMount() {
+        this.fetchData()
+    }
+
+    fetchData = () => {
         var path = `/users/${this.props.username}/followers`
         fetch(`${GITHUB_URL}${path}?${GITHUB_TOKEN}`)
         .then(response => response.json())
